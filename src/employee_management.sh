@@ -24,9 +24,9 @@ function pause_and_return {
 function login {
     while true; do
         clear
-        printf "${BLUE}╔══════════════════════════════════════════════╗\n"
-        printf "║                  ${YELLOW}${BOLD}Admin Login${NC}${BLUE}                 ║\n"
-        printf "╚══════════════════════════════════════════════╝${NC}\n\n"
+        printf "${BLUE}╔═════════════════════════════════════════════╗\n"
+        printf "║                 ${YELLOW}${BOLD}Admin Login${NC}${BLUE}                 ║\n"
+        printf "╚═════════════════════════════════════════════╝${NC}\n\n"
 
         read -p "$(printf "${GREEN}➡️  Username: ${NC}")" username
         read -s -p "$(printf "${GREEN}➡️  Password: ${NC}")" password
@@ -38,7 +38,7 @@ function login {
             return 0
         else
             printf "\n${RED}❌ Invalid credentials. Please try again.${NC}\n"
-            sleep 3
+            sleep 5
         fi
     done
 }
@@ -67,9 +67,9 @@ function add_employee {
 
 function view_employees {
     clear
-    printf "${BLUE}╔══════════════════════════════════════════════╗\n"
+    printf "${BLUE}╔══════════════════════════════════════════════════╗\n"
     printf "║                 ${YELLOW}${BOLD}Employee Records${NC}${BLUE}                 ║\n"
-    printf "╚══════════════════════════════════════════════╝${NC}\n\n"
+    printf "╚══════════════════════════════════════════════════╝${NC}\n\n"
 
     if [[ ! -s "$EMPLOYEE_FILE" ]]; then
         printf "${RED}No employee records found.${NC}\n"
@@ -82,9 +82,9 @@ function view_employees {
 
 function delete_employee {
     clear
-    printf "${BLUE}╔══════════════════════════════════════════════╗\n"
-    printf "║                ${YELLOW}${BOLD}Delete Employee${NC}${BLUE}                 ║\n"
-    printf "╚══════════════════════════════════════════════╝${NC}\n\n"
+    printf "${BLUE}╔═════════════════════════════════════════════════╗\n"
+    printf "║                 ${YELLOW}${BOLD}Delete Employee${NC}${BLUE}                 ║\n"
+    printf "╚═════════════════════════════════════════════════╝${NC}\n\n"
 
     read -p "$(printf "${GREEN}➡️  Enter employee ID to delete: ${NC}")" id
     
