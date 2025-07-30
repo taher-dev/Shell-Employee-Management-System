@@ -2,6 +2,10 @@
 
 This is a simple Employee Management Application implemented in shell script. It allows users to manage employee records through a command-line interface.
 
+## Preview
+
+<img src="images/thumbnail-main-menu.png" alt="Preview Main Menu" height="150">
+
 ## Project Structure
 
 ```
