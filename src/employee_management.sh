@@ -97,6 +97,39 @@ function delete_employee {
     pause_and_return
 }
 
+function update_employee {
+    clear
+    printf "${BLUE}╔═════════════════════════════════════════════════╗\n"
+    printf "║                ${YELLOW}${BOLD}Update Employee${NC}${BLUE}                 ║\n"
+    printf "╚═════════════════════════════════════════════════╝${NC}\n\n"
+
+    read -p "$(printf "${GREEN}➡️  Enter employee ID to update: ${NC}")" id
+
+    if grep -q "^$id," "$EMPLOYEE_FILE"; then
+        old_record=$(grep "^$id," "$EMPLOYEE_FILE")
+        old_name=$(echo "$old_record" | cut -d',' -f2)
+        old_position=$(echo "$old_record" | cut -d',' -f3)
+
+        read -p "$(printf "${GREEN}➡️  Enter new name [${WHITE}$old_name${GREEN}]: ${NC}")" name
+        read -p "$(printf "${GREEN}➡️  Enter new position [${WHITE}$old_position${GREEN}]: ${NC}")" position
+
+        # Use old values if input is empty
+        name=${name:-$old_name}
+        position=${position:-$old_position}
+
+        # Update the record
+        grep -v "^$id," "$EMPLOYEE_FILE" > temp.txt
+        echo "$id,$name,$position" >> temp.txt
+        sort -t, -k1,1n temp.txt > "$EMPLOYEE_FILE"
+        rm -f temp.txt
+
+        printf "\n${GREEN}✏️  Employee with ID ${WHITE}$id${GREEN} updated successfully.${NC}\n"
+    else
+        printf "\n${RED}❌ Employee with ID ${WHITE}$id${RED} not found.${NC}\n"
+    fi
+    pause_and_return
+}
+
 function main {
     login
 
@@ -109,8 +142,9 @@ function main {
         printf "║  ${WHITE}%-44s${BLUE}║\n" "        1. Add Employee"
         printf "║  ${WHITE}%-44s${BLUE}║\n" "        2. View Employees"
         printf "║  ${WHITE}%-44s${BLUE}║\n" "        3. Delete Employee"
+        printf "║  ${WHITE}%-44s${BLUE}║\n" "        4. Update Employee"
         printf "║  ${WHITE}%-44s${BLUE}║\n"
-        printf "║  ${WHITE}%-44s${BLUE}║\n" "        4. Exit"
+        printf "║  ${WHITE}%-44s${BLUE}║\n" "        5. Exit"
         printf "╚══════════════════════════════════════════════╝${NC}\n"
 
         # --- Prompt for user input ---
@@ -120,7 +154,8 @@ function main {
             1) add_employee ;;
             2) view_employees ;;
             3) delete_employee ;;
-            4) clear; printf "${GREEN}Goodbye!${NC}\n"; exit 0 ;;
+            4) update_employee ;;
+            5) clear; printf "${GREEN}Goodbye!${NC}\n"; exit 0 ;;
             *)
               printf "\n${RED}Invalid option. Please try again.${NC}\n"
               sleep 1
