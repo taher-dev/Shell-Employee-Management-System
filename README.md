@@ -16,9 +16,9 @@ employee-management-app
 ## Features
 
 - Add new employee records
-- View details of a specific employee
 - Delete employee records
 - List all employees
+- Update employee record
 
 ## Requirements
 
@@ -44,9 +44,9 @@ employee-management-app
 ## Managing Employee Records
 
 - To add an employee, follow the prompts after selecting the add option.
-- To view an employee, enter the employee ID when prompted.
 - To delete an employee, provide the employee ID of the record you wish to remove.
 - To list all employees, select the list option.
+- To update employee record, enter the employee ID of the record you wish to update.
 
 ## Notes
 
